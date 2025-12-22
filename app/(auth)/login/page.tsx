@@ -47,7 +47,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-6 rounded-lg border p-8 bg-white dark:bg-zinc-900"
+        className="w-full max-w-sm space-y-6 rounded-lg border p-8 bg-white dark:bg-zinc-900 mx-6 lg:mx-0"
       >
         <h1 className="text-2xl font-bold text-black dark:text-white">
           Entrar
