@@ -15,15 +15,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 const clientsData = [
   { name: "João Silva", email: "joao@email.com", status: "Ativo" },
   { name: "Maria Souza", email: "maria@email.com", status: "Inativo" },
-  { name: "Carlos Pereira", email: "carlos@email.com", status: "Ativo" },
+  { name: "Carlos Pereira", email: "carlos@email.com", status: "Cancelado" },
   { name: "Ana Oliveira", email: "ana@email.com", status: "Ativo" },
 ];
 
 export default function DashboardHome() {
+  function getBadgeVariant(status: string) {
+    switch (status) {
+      case "Ativo":
+        return "default"; // verde
+      case "Inativo":
+        return "destructive"; // vermelho
+      default:
+        return "secondary"; // amarelo/laranja ou outro status
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* Cabeçalho e toasts */}
@@ -108,17 +120,17 @@ export default function DashboardHome() {
                 <TableCell>{client.name}</TableCell>
                 <TableCell>{client.email}</TableCell>
                 <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                  <Badge
+                    className={
                       client.status === "Ativo"
-                        ? "bg-green-100 text-green-800"
+                        ? "bg-green-500 text-white"
                         : client.status === "Inativo"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}
+                        ? "bg-red-500 text-white"
+                        : "bg-gray-500 text-white"
+                    }
                   >
                     {client.status}
-                  </span>
+                  </Badge>
                 </TableCell>
               </TableRow>
             ))}
