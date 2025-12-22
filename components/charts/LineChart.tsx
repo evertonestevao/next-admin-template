@@ -10,8 +10,10 @@ import {
 export default function LineChart() {
   const data = [
     { month: "Jan", users: 400 },
-    { month: "Feb", users: 300 },
-    { month: "Mar", users: 500 },
+    { month: "Fev", users: 300 },
+    { month: "Mar", users: 100 },
+    { month: "Abr", users: 670 },
+    { month: "Mai", users: 900 },
   ];
 
   return (

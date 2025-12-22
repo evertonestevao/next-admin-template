@@ -2,6 +2,7 @@
 
 import { showToast } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import KPI from "@/components/kpi";
 import LineChart from "@/components/charts/LineChart";
 import BarChart from "@/components/charts/BarChart";
 import PieChart from "@/components/charts/PieChart";
@@ -32,35 +33,56 @@ export default function DashboardHome() {
           Bem-vindo ao dashboard! Aqui é a tela inicial.
         </p>
 
-        <div className="flex gap-4 flex-wrap">
-          <Button
-            variant="default"
-            className="bg-green-500 hover:bg-green-600 text-white"
-            onClick={() =>
-              showToast.success("Sucesso! Operação realizada com sucesso.")
-            }
-          >
-            Success Toast
-          </Button>
-
-          <Button
-            variant="default"
-            className="bg-red-500 hover:bg-red-600 text-white"
-            onClick={() => showToast.error("Erro! Algo deu errado.")}
-          >
-            Error Toast
-          </Button>
-
-          <Button
-            variant="default"
-            className="bg-blue-500 hover:bg-blue-600 text-white"
-            onClick={() =>
-              showToast.info("Info! Esta é uma mensagem informativa.")
-            }
-          >
-            Info Toast
-          </Button>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <KPI
+            title="Clientes"
+            value={1234}
+            trend="up"
+            description="Última semana"
+          />
+          <KPI
+            title="Vendas"
+            value="R$ 56.780,98"
+            trend="down"
+            description="Comparado com mês passado"
+          />
+          <KPI
+            title="Pedidos"
+            value={342}
+            trend="up"
+            description="Últimos 30 dias"
+          />
         </div>
+      </div>
+
+      <div className="flex gap-4 flex-wrap mt-4">
+        <Button
+          variant="default"
+          className="bg-green-500 hover:bg-green-600 text-white"
+          onClick={() =>
+            showToast.success("Sucesso! Operação realizada com sucesso.")
+          }
+        >
+          Success Toast
+        </Button>
+
+        <Button
+          variant="default"
+          className="bg-red-500 hover:bg-red-600 text-white"
+          onClick={() => showToast.error("Erro! Algo deu errado.")}
+        >
+          Error Toast
+        </Button>
+
+        <Button
+          variant="default"
+          className="bg-blue-500 hover:bg-blue-600 text-white"
+          onClick={() =>
+            showToast.info("Info! Esta é uma mensagem informativa.")
+          }
+        >
+          Info Toast
+        </Button>
       </div>
 
       {/* Tabela de exemplo */}
@@ -106,9 +128,15 @@ export default function DashboardHome() {
 
       {/* Gráficos */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
-        <BarChart />
-        <PieChart />
-        <LineChart />
+        <div className="h-96">
+          <BarChart />
+        </div>
+        <div className="h-96">
+          <PieChart />
+        </div>
+        <div className="h-96">
+          <LineChart />
+        </div>
       </div>
     </div>
   );

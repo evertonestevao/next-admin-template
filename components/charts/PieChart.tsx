@@ -18,7 +18,7 @@ const COLORS = ["#6366f1", "#f43f5e", "#fbbf24"];
 
 export default function ProductPieChart() {
   return (
-    <Card className="w-full h-80">
+    <Card className="w-full h-full">
       <CardHeader>
         <CardTitle>Vendas por produto</CardTitle>
       </CardHeader>

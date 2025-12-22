@@ -13,11 +13,13 @@ const data = [
   { name: "Produto A", sales: 240 },
   { name: "Produto B", sales: 120 },
   { name: "Produto C", sales: 360 },
+  { name: "Produto D", sales: 670 },
+  { name: "Produto E", sales: 260 },
 ];
 
 export default function SalesBarChart() {
   return (
-    <Card className="w-full h-64">
+    <Card className="w-full h-full">
       <CardHeader>
         <CardTitle>Vendas por produto</CardTitle>
       </CardHeader>
