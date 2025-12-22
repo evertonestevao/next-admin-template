@@ -1,5 +1,6 @@
 import Sidebar from "@/components/sidebar";
 import Topbar from "@/components/topbar";
+import { Toaster } from "sonner";
 import { getCurrentUser } from "@/lib/auth";
 
 export default async function PrivateLayout({
@@ -25,6 +26,7 @@ export default async function PrivateLayout({
           {children}
         </main>
       </div>
+      <Toaster position="top-right" richColors />
     </div>
   );
 }
