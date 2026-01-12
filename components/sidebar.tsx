@@ -42,7 +42,7 @@ export default function Sidebar() {
 
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1 rounded hover:bg-muted"
+          className="p-1 rounded hover:bg-muted hover:cursor-pointer"
         >
           <Menu size={18} />
         </button>

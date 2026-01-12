@@ -17,16 +17,18 @@ export default async function PrivateLayout({
   };
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
+    <>
+      <div className="flex h-screen">
+        <Sidebar />
 
-      <div className="flex flex-col flex-1">
-        <Topbar user={user} />
-        <main className="flex-1 p-6 bg-background overflow-auto">
-          {children}
-        </main>
+        <div className="flex flex-col flex-1">
+          <Topbar user={user} />
+          <main className="flex-1 p-6 bg-background overflow-auto">
+            {children}
+          </main>
+        </div>
       </div>
       <Toaster position="top-right" richColors />
-    </div>
+    </>
   );
 }

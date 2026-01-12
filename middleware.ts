@@ -2,24 +2,25 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const pathname = req.nextUrl.pathname;
+  const { pathname } = req.nextUrl;
 
-  // Permite tudo no ambiente de desenvolvimento
+  // Libera tudo em DEV (facilita desenvolvimento)
   if (process.env.NODE_ENV === "development") {
     return NextResponse.next();
   }
 
   const token = req.cookies.get("token")?.value;
-  const isAuthRoute = pathname.startsWith("/login");
-  const isPrivateRoute = pathname.startsWith("/dashboard");
 
-  // Não logado tentando acessar área privada
-  if (!token && isPrivateRoute) {
+  const isLoginRoute = pathname === "/login";
+  const isDashboardRoot = pathname === "/dashboard";
+
+  // Não logado tentando acessar o dashboard
+  if (!token && isDashboardRoot) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
   // Logado tentando acessar login
-  if (token && isAuthRoute) {
+  if (token && isLoginRoute) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
@@ -28,7 +29,7 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/dashboard/:path*", // protege tudo dentro do dashboard
+    "/dashboard", // protege só a raiz
     "/login",
   ],
 };
