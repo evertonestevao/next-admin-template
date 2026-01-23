@@ -27,11 +27,12 @@ export default function Home() {
           </p>
 
           <div className="flex gap-4 pt-4">
-            <Button size="lg">Ver demonstração</Button>
-
-            <Button variant="outline" size="lg">
-              Documentação
-            </Button>
+            <Link href={"/login"}>
+              <Button size="lg">Ver Login</Button>
+            </Link>
+            <Link href={"/dashboard"}>
+              <Button size="lg">Ver dashboard</Button>
+            </Link>
           </div>
         </div>
 
