@@ -1,14 +1,21 @@
-import Sidebar from "@/components/sidebar";
-import Topbar from "@/components/topbar";
-import { Toaster } from "sonner";
-import { getCurrentUser } from "@/lib/auth";
+"use client";
 
-export default async function PrivateLayout({
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import Topbar from "@/components/topbar";
+
+// carrega só no client (evita hydration mismatch)
+const Sidebar = dynamic(() => import("@/components/sidebar"), { ssr: false });
+const Toaster = dynamic(() => import("sonner").then((m) => m.Toaster), {
+  ssr: false,
+});
+
+export default function PrivateLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // const user = await getCurrentUser();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const user = {
     id: "1",
@@ -17,18 +24,18 @@ export default async function PrivateLayout({
   };
 
   return (
-    <>
-      <div className="flex h-screen">
-        <Sidebar />
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
-        <div className="flex flex-col flex-1">
-          <Topbar user={user} />
-          <main className="flex-1 p-6 bg-background overflow-auto">
-            {children}
-          </main>
-        </div>
+      <div className="flex flex-col flex-1">
+        <Topbar user={user} onMenuClick={() => setMobileOpen(true)} />
+
+        <main className="flex-1 p-6 bg-background overflow-auto">
+          {children}
+        </main>
       </div>
+
       <Toaster position="top-right" richColors />
-    </>
+    </div>
   );
 }
