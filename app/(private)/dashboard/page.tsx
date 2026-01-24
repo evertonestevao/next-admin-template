@@ -16,12 +16,38 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { DollarSign, ShoppingCart, Users } from "lucide-react";
+import TitleSection from "@/components/titlepage";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChartExample } from "@/components/example-chart";
+import { ChartAreaStacked } from "@/components/chart-area-stacked";
+import { ChartPieDonutText } from "@/components/chart-pie-donut-text";
 
 const clientsData = [
-  { name: "João Silva", email: "joao@email.com", status: "Ativo" },
-  { name: "Maria Souza", email: "maria@email.com", status: "Inativo" },
-  { name: "Carlos Pereira", email: "carlos@email.com", status: "Cancelado" },
-  { name: "Ana Oliveira", email: "ana@email.com", status: "Ativo" },
+  {
+    name: "João Silva",
+    email: "joao@email.com",
+    status: "Ativo",
+    avatarUrl: "",
+  },
+  {
+    name: "Maria Souza",
+    email: "maria@email.com",
+    status: "Inativo",
+    avatarUrl: "",
+  },
+  {
+    name: "Carlos Pereira",
+    email: "carlos@email.com",
+    status: "Cancelado",
+    avatarUrl: "",
+  },
+  {
+    name: "Ana Oliveira",
+    email: "ana@email.com",
+    status: "Ativo",
+    avatarUrl: "",
+  },
 ];
 
 export default function DashboardHome() {
@@ -40,10 +66,10 @@ export default function DashboardHome() {
     <div className="space-y-6">
       {/* Cabeçalho e toasts */}
       <div>
-        <h1 className="text-2xl font-bold mb-2">Início</h1>
-        <p className="mb-4 text-muted-foreground">
-          Bem-vindo ao dashboard! Aqui é a tela inicial.
-        </p>
+        <TitleSection
+          title="Início"
+          description="Bem-vindo ao dashboard! Aqui é a tela inicial."
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <KPI
@@ -51,18 +77,24 @@ export default function DashboardHome() {
             value={1234}
             trend="up"
             description="Última semana"
+            info="Novos clientes nos ultimos 7 dias"
+            icon={Users}
           />
+
           <KPI
             title="Vendas"
             value="R$ 56.780,98"
             trend="down"
             description="Comparado com mês passado"
+            icon={DollarSign}
           />
+
           <KPI
             title="Pedidos"
             value={342}
             trend="up"
             description="Últimos 30 dias"
+            icon={ShoppingCart}
           />
         </div>
       </div>
@@ -97,8 +129,7 @@ export default function DashboardHome() {
         </Button>
       </div>
 
-      {/* Tabela de exemplo */}
-      <div className="overflow-x-auto rounded-lg border border-muted-foreground/10 bg-background shadow-sm">
+      <div className="  overflow-x-auto rounded-lg border border-muted-foreground/10 bg-background shadow-sm">
         <div className="px-4 py-2 border-b border-muted-foreground/20">
           <h2 className="text-lg font-semibold">Clientes Recentes</h2>
         </div>
@@ -107,8 +138,7 @@ export default function DashboardHome() {
           <TableHeader className="bg-muted-foreground/5">
             <TableRow>
               <TableHead className="text-left">Nome</TableHead>
-              <TableHead className="text-left">E-mail</TableHead>
-              <TableHead className="text-left">Status</TableHead>
+              <TableHead className="text-right">Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -117,16 +147,43 @@ export default function DashboardHome() {
                 key={idx}
                 className="hover:bg-muted-foreground/10 transition-colors"
               >
-                <TableCell>{client.name}</TableCell>
-                <TableCell>{client.email}</TableCell>
                 <TableCell>
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={client.avatarUrl} alt={client.name} />
+                      <AvatarFallback>
+                        {client.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .slice(0, 2)
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div className="flex flex-col leading-tight">
+                      <span className="font-medium">{client.name}</span>
+                      <span
+                        className="text-sm text-muted-foreground cursor-pointer hover:underline"
+                        onClick={() => {
+                          navigator.clipboard.writeText(client.email);
+                          showToast.info("Copiado para área de transferência");
+                        }}
+                        title="Clique para copiar"
+                      >
+                        {client.email}
+                      </span>
+                    </div>
+                  </div>
+                </TableCell>
+
+                <TableCell className="text-right">
                   <Badge
                     className={
                       client.status === "Ativo"
                         ? "bg-green-500 text-white"
                         : client.status === "Inativo"
-                        ? "bg-red-500 text-white"
-                        : "bg-gray-500 text-white"
+                          ? "bg-red-500 text-white"
+                          : "bg-gray-500 text-white"
                     }
                   >
                     {client.status}
@@ -138,7 +195,12 @@ export default function DashboardHome() {
         </Table>
       </div>
 
-      {/* Gráficos */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
+        <ChartExample />
+        <ChartPieDonutText />
+        <ChartAreaStacked />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
         <div className="h-96">
           <BarChart />

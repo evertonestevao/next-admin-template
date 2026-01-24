@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div className="text-center space-y-3">
             <div
               className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-primary text-5xl
-             transition-all duration-300 ease-out hover:scale-110 hover:bg-primary/10"
+             transition-all duration-300 ease-out hover:scale-110 hover:bg-primary/10 cursor-default"
             >
               ⬢
             </div>
@@ -112,7 +112,7 @@ export default function LoginPage() {
           <div className="flex items-center justify-between text-sm">
             <button
               type="button"
-              className="text-primary hover:underline"
+              className="text-primary hover:underline hover:cursor-pointer"
               onClick={() => router.push("/esqueci-senha")}
             >
               Esqueci a senha
@@ -120,7 +120,7 @@ export default function LoginPage() {
 
             <button
               type="button"
-              className="text-muted-foreground hover:underline"
+              className="text-muted-foreground hover:underline hover:cursor-pointer"
               onClick={() => router.push("/cadastro")}
             >
               Criar conta
