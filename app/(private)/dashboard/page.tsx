@@ -22,6 +22,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChartExample } from "@/components/example-chart";
 import { ChartAreaStacked } from "@/components/chart-area-stacked";
 import { ChartPieDonutText } from "@/components/chart-pie-donut-text";
+import { useState } from "react";
+import { ViewSwitcher } from "@/components/ViewSwitcher";
+import ExampleListPage from "@/components/example-list-page";
 
 const clientsData = [
   {
@@ -51,6 +54,9 @@ const clientsData = [
 ];
 
 export default function DashboardHome() {
+  type ViewMode = "list" | "table" | "kanban";
+
+  const [view, setView] = useState<ViewMode>("list");
   function getBadgeVariant(status: string) {
     switch (status) {
       case "Ativo":
@@ -99,35 +105,9 @@ export default function DashboardHome() {
         </div>
       </div>
 
-      <div className="flex gap-4 flex-wrap mt-4">
-        <Button
-          variant="default"
-          className="bg-green-500 hover:bg-green-600 text-white"
-          onClick={() =>
-            showToast.success("Sucesso! Operação realizada com sucesso.")
-          }
-        >
-          Success Toast
-        </Button>
+      <ViewSwitcher value={view} onChange={setView} />
 
-        <Button
-          variant="default"
-          className="bg-red-500 hover:bg-red-600 text-white"
-          onClick={() => showToast.error("Erro! Algo deu errado.")}
-        >
-          Error Toast
-        </Button>
-
-        <Button
-          variant="default"
-          className="bg-blue-500 hover:bg-blue-600 text-white"
-          onClick={() =>
-            showToast.info("Info! Esta é uma mensagem informativa.")
-          }
-        >
-          Info Toast
-        </Button>
-      </div>
+      <ExampleListPage />
 
       <div className="  overflow-x-auto rounded-lg border border-muted-foreground/10 bg-background shadow-sm">
         <div className="px-4 py-2 border-b border-muted-foreground/20">
@@ -211,6 +191,35 @@ export default function DashboardHome() {
         <div className="h-96">
           <LineChart />
         </div>
+      </div>
+      <div className="flex gap-4 flex-wrap mt-4">
+        <Button
+          variant="default"
+          className="bg-green-500 hover:bg-green-600 text-white"
+          onClick={() =>
+            showToast.success("Sucesso! Operação realizada com sucesso.")
+          }
+        >
+          Success Toast
+        </Button>
+
+        <Button
+          variant="default"
+          className="bg-red-500 hover:bg-red-600 text-white"
+          onClick={() => showToast.error("Erro! Algo deu errado.")}
+        >
+          Error Toast
+        </Button>
+
+        <Button
+          variant="default"
+          className="bg-blue-500 hover:bg-blue-600 text-white"
+          onClick={() =>
+            showToast.info("Info! Esta é uma mensagem informativa.")
+          }
+        >
+          Info Toast
+        </Button>
       </div>
     </div>
   );

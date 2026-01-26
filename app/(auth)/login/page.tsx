@@ -138,7 +138,7 @@ export default function LoginPage() {
           </Button>
         </form>
       </div>
-      <div className="hidden lg:flex flex-col justify-between p-12 bg-gradient-to-br from-primary/90 to-primary text-primary-foreground">
+      <div className="hidden lg:flex flex-col justify-between p-12 bg-gradient-to-br from-primary/20 to-primary text-primary-foreground">
         <div>
           <h1 className="text-3xl font-bold text-white">Nome do Sistema</h1>
           <p className="mt-2 text-sm  text-white">
